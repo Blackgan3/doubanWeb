@@ -1,0 +1,54 @@
+
+    <h1>{{movie.title}}详细介绍</h1>
+    <!--这里是电影介绍的图片部分-->
+    <div  class="media">
+        <div class="media-left">
+            <img ng-src={{movie.images.large}} >
+        </div>
+        <!--<span class="badge">{{movie.rating.average}}</span>-->
+        <!--这里是电影介绍的文字主体部分-->
+        <div  ng-show="movie" class="media-body detailModule">
+            <h4 class="media-heading">电影:{{movie.title}}&nbsp;&nbsp;&nbsp;评分:{{movie.rating.average}}</h4>
+            <p><span>导演:</span><span ng-repeat="actor in movie.directors">{{actor.name}}{{last?'':','}}</span></p>
+            <p><span>主演:</span><span ng-repeat="cast  in movie.casts">{{cast.name}}{{last?'':','}}</span></p>
+            <p><span>上映时间:</span><span>{{movie.year}}</span></p>
+            <p><span>制片国家/地区:{{movie.countries.join(',')}}</span></p>
+            <p>类型: <span>{{movie.genres.join(',')}}</span></p>
+            <p>又名:{{movie.aka.join(',')}}</p>
+        </div>
+        <div ng-hide="movie" id="loading">
+            <div id="loading-center">
+                <div id="loading-center-absolute">
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                    <div class="object"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div><p>{{movie.title}}剧情简介:</p>{{movie.summary}}</div>
+    <!--在这里放的是加载数据时的缓冲动画-->

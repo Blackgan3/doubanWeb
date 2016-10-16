@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>几种简单的跨域请求</title>
+</head>
+<body>
+<script>
+    function fun(arguments) {
+        console.log(res);
+    }
+</script>
+<!--这是比较简单的-->
+<script src="" ></script>
+<!--jquery中的跨域请求-->
+<script>
+    $.ajax({
+        url:'',
+        type:'get',
+        dataType:'jsonp',
+        jsonp:'_jsonp',
+        success:function(){}
+    });
+</script>
+<script>
+    //angular其中的回调函数名称地方是固定为JSON_CALLBACK
+    angular.module('jsonpApp',[]).controller('DemlCtrl',['$http',function($http){
+        $http.jsonp('https://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero')
+            .then(function(){
+
+            })
+    }]);
+    //另外自己封装的
+    function jsonp(url,params,callback){
+        //1,先需要拼接参数
+        var queryString = '?';
+        for(key in params){
+            queryString+= key+'='+params[key]+'&&';
+        }
+        //用事件戳搞一个函数名,用来作为回调函数名,避免污染全局空间
+        var funName = "my_callback"+new Date().getTime();
+        queryString+'callback'+'='+funName;
+        //先挂在函数
+        window.[funName] = callback;
+        //要向页面添加script标签
+       var script =  document.createElement('script');
+        script.src=url+queryString;
+
+    }
+    json('url',{count:5,start:2},function(){
+
+    });
+</script>
+
+</body>
+</html>

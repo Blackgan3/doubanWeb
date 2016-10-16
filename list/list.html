@@ -1,0 +1,59 @@
+<h1>{{title}}</h1>
+<a ng-repeat="movie in movieList" href="#/search/subject/{{movie.id}}" class="list-group-item">
+    <span class="badge">{{movie.rating.average}}</span>
+    <!--这里是电影介绍的图片部分-->
+    <div class="media">
+        <div class="media-left" href="#">
+            <img ng-src={{movie.images.small}} >
+        </div>
+        <!--这里是电影介绍的文字主体部分-->
+        <div class="media-body">
+            <h4 class="media-heading">{{movie.title}}</h4>
+            <h5><span>导演:</span><span ng-repeat="actor in movie.directors">{{actor.name}}{{last?'':','}}</span></h5>
+            <h5>类型: <span>{{movie.genres.join(',')}}</span></h5>
+        </div>
+    </div>
+    <!--在这里放的是加载数据时的缓冲动画-->
+
+
+</a>
+<div ng-hide="movieList.length" id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+        </div>
+    </div>
+
+</div>
+<span>当前共有{{totalPage}}页,当前是{{currentPage}}页</span>
+<span>共有{{res.total}}部电影</span>
+<div>
+    <ul ng-show="movieList.length" class="pager">
+        <li ng-class="{disabled:(currentPage<2)}"><a  ng-click="changeData(currentPage-1)" >上一页</a></li>
+        <li><a ng-click="changeData(currentPage+1)" >下一页</a></li>
+    </ul>
+</div>
